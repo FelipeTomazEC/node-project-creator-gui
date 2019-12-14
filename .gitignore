@@ -1,0 +1,11 @@
+# Project exclude paths
+.idea
+.gradle
+/build/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+!gradle/wrapper/gradle-wrapper.jar
