@@ -15,7 +15,7 @@ javafx {
 }
 
 mainClassName = "br.ufop.tomaz.Launcher"
-applicationName = "Quick Time Tabling"
+applicationName = "Node Project Creator"
 
 repositories {
     mavenCentral()
