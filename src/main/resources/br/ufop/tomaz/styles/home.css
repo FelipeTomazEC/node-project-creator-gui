@@ -1,0 +1,63 @@
+.container{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 500px;
+    -fx-background-color: #b6a1b6;
+    -fx-padding: 10px;
+}
+
+.header{
+    -fx-alignment: center;
+}
+
+.logo{
+    -fx-fit-to-height: 50px;
+    -fx-pref-height: 50px;
+}
+
+.label{
+    -fx-font-size: 12pt;
+}
+
+.title{
+    -fx-text-fill: white;
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+}
+
+.features-container{
+    -fx-spacing: 5px;
+    -fx-padding:  10 0 0 0;
+}
+
+.card{
+    -fx-font-size: 11pt;
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+    -fx-background-color: #7f7f7f;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.card > .title{
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+}
+
+.check-box{
+    -fx-text-fill: white;
+}
+
+.radio-button{
+    -fx-text-fill: white;
+}
+
+.button{
+    -fx-background-color: #655565;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 50px;
+}
+
+.button:disabled {
+    -fx-background-color: green;
+}
