@@ -16,9 +16,19 @@ public class NpmAppCreator implements AppCreator {
     }
     @Override
     public void createApp() {
-        if(projectDirectory.mkdirs()){
-            System.out.println("App created!");
-        } else{
+        if (this.projectDirectory.mkdirs()) {
+            System.out.println("Npm App Creator > Creating ".concat(this.appName).concat(" Project..."));
+
+            String npmCreateCommand = "npm init --yes";
+            ProcessBuilder processBuilder = new ProcessBuilder("powershell.exe", npmCreateCommand);
+            processBuilder.directory(this.projectDirectory);
+            ProcessExecutor.execute(processBuilder);
+
+            this.createDirectoryStructure(this.projectDirectory);
+
+            System.out.println("Npm App Creator > Project ".concat(this.appName).concat(" created."));
+
+        } else {
             System.out.println("Occurred some error!");
         }
     }
