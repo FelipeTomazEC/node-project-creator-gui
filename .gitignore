@@ -7,5 +7,6 @@
 *.jar
 *.war
 *.ear
+*.hprof
 
 !gradle/wrapper/gradle-wrapper.jar

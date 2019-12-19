@@ -30,8 +30,8 @@
             <VBox prefHeight="342.0" prefWidth="280.0" styleClass="features-container">
                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="260.0" styleClass="card">
                   <Label styleClass="title" text="Package Manager" />
-                  <HBox alignment="CENTER" prefHeight="21.0" prefWidth="202.0">
-                     <RadioButton fx:id="rbNpm" mnemonicParsing="false" selected="true" text="NPM  ">
+                  <HBox alignment="CENTER" prefHeight="21.0" prefWidth="202.0" spacing="15">
+                     <RadioButton fx:id="rbNpm" mnemonicParsing="false" selected="true" text="NPM">
                      <toggleGroup>
                         <ToggleGroup fx:id="radioGroup" />
                      </toggleGroup></RadioButton>
@@ -78,7 +78,7 @@
     <bottom>
         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <buttons>
-                <Button fx:id="btnCreateProject" mnemonicParsing="false" text="Create Project" />
+                <Button fx:id="btnCreateProject" mnemonicParsing="false" text="Create Project" onAction="#createProject"/>
             </buttons>
         </ButtonBar>
     </bottom>
