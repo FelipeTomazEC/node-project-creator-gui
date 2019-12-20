@@ -35,6 +35,7 @@ public interface AppCreator {
                 JSONObject scripts = new JSONObject();
                 scripts.put("start", "node src/index.js");
                 packageJson.put("scripts", scripts);
+                packageJson.put("main", "src/index.js");
 
                 BufferedWriter bf = new BufferedWriter(new FileWriter(packageJsonFile));
                 bf.write(packageJson.toJSONString().replace("\\", ""));

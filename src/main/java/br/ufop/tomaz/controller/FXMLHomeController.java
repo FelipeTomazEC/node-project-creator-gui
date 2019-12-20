@@ -77,5 +77,13 @@ public class FXMLHomeController implements Initializable {
                 featuresToInstall.remove(Features.BABEL);
             }
         });
+
+        chkNodemon.selectedProperty().addListener((ob, ov, nv) -> {
+            if(nv){
+                featuresToInstall.put(Features.NODEMON, Map.entry(new Nodemon(), ""));
+            } else {
+                featuresToInstall.remove(Features.NODEMON);
+            }
+        });
     }
 }
