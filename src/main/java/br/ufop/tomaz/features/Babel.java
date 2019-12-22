@@ -4,10 +4,11 @@ import br.ufop.tomaz.util.PackageManagers;
 import br.ufop.tomaz.util.ProcessExecutor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class Babel implements Feature {
         insertScripts(projectDir);
 
         String packageManagerName = packageManager.name();
-        String[] packages = {"@babel/core", "@babel/cli", "@babel/preset-env", "@babel/node"};
+        String[] packages = getPackagesToInstall(projectDir);
         List<ProcessBuilder> queue = getProcessBuilderQueue(projectDir, packageManagerName, packages);
         queue.forEach(process -> ProcessExecutor.execute(process));
 
@@ -60,14 +61,26 @@ public class Babel implements Feature {
     @Override
     public void createConfigFile(File projectDir) {
         String filepath = projectDir.getPath().concat("/.babelrc");
-        JSONObject config = new JSONObject();
+        JSONObject babelConfigJson = new JSONObject();
         JSONArray presets = new JSONArray();
-        presets.add("@babel/preset-env");
+        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
 
-        config.put("presets", presets);
+        if (isJestInstalled) {
+            JSONArray preset1 = new JSONArray();
+            JSONObject targets = new JSONObject();
+            targets.put("node", "current");
+            preset1.add("@babel/preset-env");
+            preset1.add(targets);
+            presets.add(preset1);
+        } else {
+            presets.add("@babel/preset-env");
+        }
+
+        babelConfigJson.put("presets", presets);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))) {
-            bw.write(config.toString());
+            bw.write(babelConfigJson.toJSONString().replace("\\", ""));
+            bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,31 +88,36 @@ public class Babel implements Feature {
 
     private void insertScripts(File projectDir) {
         System.out.println("Babel Installer > Inserting Scripts...");
-        String packageJsonPath = projectDir.getPath().concat("/").concat("package.json");
-        JSONParser parser = new JSONParser();
+        JSONObject packageJson = getPackageJson(projectDir);
+        JSONObject previousScripts = (JSONObject) packageJson.get("scripts");
+        JSONObject scripts = new JSONObject();
+        String start = ((String) previousScripts.get("start")).contains("nodemon")
+                ? "nodemon --exec babel-node src/index.js"
+                : "babel-node src/index.js";
+        String build = "babel src --out-dir dist";
+        String serve = "node dist/index.js";
 
-        try(Reader reader = new FileReader(packageJsonPath)){
-            JSONObject packageJson = (JSONObject) parser.parse(reader);
-            JSONObject previousScripts = (JSONObject) packageJson.get("scripts");
-            JSONObject scripts = new JSONObject();
-            String start = ((String) previousScripts.get("start")).contains("nodemon")
-                    ? "nodemon --exec babel-node src/index.js"
-                    : "babel-node src/index.js";
-            String build = "babel src --out-dir dist";
-            String serve = "node dist/index.js";
+        scripts.put("start", start);
+        scripts.put("build", build);
+        scripts.put("serve", serve);
+        packageJson.replace("scripts", scripts);
 
-            scripts.put("start", start);
-            scripts.put("build", build);
-            scripts.put("serve", serve);
-            packageJson.replace("scripts", scripts);
-
-            BufferedWriter bf = new BufferedWriter(new FileWriter(packageJsonPath));
-            bf.write(packageJson.toJSONString().replace("\\", ""));
-            bf.flush();
-            bf.close();
-        } catch (ParseException | IOException e) {
+        String packageJsonPath = projectDir.getPath().concat("/package.json");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(packageJsonPath))) {
+            writer.write(packageJson.toJSONString().replace("\\", ""));
+            writer.flush();
+        } catch (IOException e) {
             System.out.println("Babel Installer > Error when trying to insert scripts.");
             e.printStackTrace();
         }
     }
+
+    private String[] getPackagesToInstall(File projectDir) {
+        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
+
+        return (isJestInstalled)
+                ? "@babel/core @babel/cli @babel/preset-env @babel/node babel-jest".split(" ")
+                : "@babel/core @babel/cli @babel/preset-env @babel/node".split(" ");
+    }
+
 }

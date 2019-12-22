@@ -13,11 +13,12 @@ public class ProcessExecutor {
             String errorLine, line;
 
             while (process.isAlive()) {
-                while ((errorLine = errorStream.readLine()) != null) {
-                    System.out.println(errorLine);
-                }
                 while ((line = is.readLine()) != null) {
                     System.out.println(line);
+                }
+
+                while ((errorLine = errorStream.readLine()) != null) {
+                    System.out.println(errorLine);
                 }
             }
 
