@@ -93,5 +93,13 @@ public class FXMLHomeController implements Initializable {
                 featuresToInstall.remove(Features.JEST);
             }
         });
+
+        chkMongoose.selectedProperty().addListener((ob, ov, nv) -> {
+            if(nv){
+                featuresToInstall.put(Features.MONGOOSE, Map.entry(new Mongoose(), ""));
+            } else {
+                featuresToInstall.remove(Features.MONGOOSE);
+            }
+        });
     }
 }
