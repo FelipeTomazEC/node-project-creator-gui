@@ -18,15 +18,18 @@ public class Babel implements Feature {
     public void install(File projectDir, PackageManagers packageManager, String args) {
         System.out.println("Babel Installer > Installing ...");
 
-        createDistDirectory(projectDir);
-        createConfigFile(projectDir);
-        insertScripts(projectDir);
-
         String packageManagerName = packageManager.name();
         String[] packages = getPackagesToInstall(projectDir);
         List<ProcessBuilder> queue = getProcessBuilderQueue(projectDir, packageManagerName, packages);
         queue.forEach(process -> ProcessExecutor.execute(process));
 
+        createDistDirectory(projectDir);
+        createConfigFile(projectDir);
+        insertScripts(projectDir);
+        boolean isExpressInstalled = isThisPackageInstalled(projectDir,"express");
+        if(isExpressInstalled){
+            new Express().createAppEntryPoint(projectDir);
+        }
         System.out.println("Babel Installer > Babel installed with success!");
     }
 
