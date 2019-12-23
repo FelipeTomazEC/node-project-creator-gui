@@ -65,21 +65,11 @@ public class Babel implements Feature {
     public void createConfigFile(File projectDir) {
         String filepath = projectDir.getPath().concat("/.babelrc");
         JSONObject babelConfigJson = new JSONObject();
-        JSONArray presets = new JSONArray();
-        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
-
-        if (isJestInstalled) {
-            JSONArray preset1 = new JSONArray();
-            JSONObject targets = new JSONObject();
-            targets.put("node", "current");
-            preset1.add("@babel/preset-env");
-            preset1.add(targets);
-            presets.add(preset1);
-        } else {
-            presets.add("@babel/preset-env");
-        }
+        JSONArray presets = getPresets(projectDir);
+        JSONArray plugins = getPlugins();
 
         babelConfigJson.put("presets", presets);
+        babelConfigJson.put("plugins", plugins);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))) {
             bw.write(babelConfigJson.toJSONString().replace("\\", ""));
@@ -117,10 +107,45 @@ public class Babel implements Feature {
 
     private String[] getPackagesToInstall(File projectDir) {
         boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
-
+        String common = "@babel/core " +
+                "@babel/cli " +
+                "@babel/preset-env " +
+                "@babel/node " +
+                "@babel/plugin-proposal-class-properties";
         return (isJestInstalled)
-                ? "@babel/core @babel/cli @babel/preset-env @babel/node babel-jest".split(" ")
-                : "@babel/core @babel/cli @babel/preset-env @babel/node".split(" ");
+                ?  common.concat(" babel-jest").split(" ")
+                : common.split(" ");
+    }
+
+    private JSONArray getPresets (File projectDir){
+        JSONArray presets = new JSONArray();
+//        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
+//        if (isJestInstalled) {
+//            JSONArray preset1 = new JSONArray();
+//            JSONObject targets = new JSONObject();
+//            targets.put("node", "current");
+//            preset1.add("@babel/preset-env");
+//            preset1.add(targets);
+//            presets.add(preset1);
+//        } else {
+//            presets.add("@babel/preset-env");
+//        }
+        presets.add("@babel/preset-env");
+        return presets;
+    }
+
+    private JSONArray getPlugins(){
+        JSONArray plugins = new JSONArray();
+        JSONArray plugin1 = new JSONArray();
+        JSONObject plugin1ConfigObj = new JSONObject();
+        plugin1ConfigObj.put("loose", true);
+
+        plugin1.add("@babel/plugin-proposal-class-properties");
+        plugin1.add(plugin1ConfigObj);
+
+        plugins.add(plugin1);
+
+        return plugins;
     }
 
 }
