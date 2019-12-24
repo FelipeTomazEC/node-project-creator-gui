@@ -22,6 +22,7 @@ public class FXMLHomeController implements Initializable {
     @FXML private CheckBox chkEslintAndPrettier;
     @FXML private CheckBox chkBabel;
     @FXML private ComboBox<String> cmbCodeStyle;
+    @FXML private ComboBox<SGBD> cmbSgbd;
     @FXML private CheckBox chkNodemon;
     @FXML private CheckBox chkJest;
     @FXML private CheckBox chkExpress;
@@ -39,9 +40,13 @@ public class FXMLHomeController implements Initializable {
         btnCreateProject.disableProperty().bind(isCreateButtonDisable);
 
         cmbCodeStyle.disableProperty().bind(chkEslintAndPrettier.selectedProperty().not());
+        cmbSgbd.disableProperty().bind(chkSequelize.selectedProperty().not());
 
         cmbCodeStyle.getItems().addAll("AirBnB", "Google", "Standard");
         cmbCodeStyle.getSelectionModel().selectFirst();
+
+        cmbSgbd.getItems().addAll(SGBD.values());
+        cmbSgbd.getSelectionModel().selectFirst();
 
         startMonitoringFeatures();
     }
@@ -57,7 +62,7 @@ public class FXMLHomeController implements Initializable {
             String selectedPackageManagerName = ((RadioButton) radioGroup.getSelectedToggle()).getText();
             PackageManagers packageManager = PackageManagers.valueOf(selectedPackageManagerName.toUpperCase());
             AppCreator appCreator = AppCreatorFactory.getAppCreator(packageManager, directoryToSave, projectName);
-
+            
             appCreator.createApp();
             appCreator.installFeatures(this.featuresToInstall);
 
@@ -125,5 +130,24 @@ public class FXMLHomeController implements Initializable {
                    featuresToInstall.put(Features.ESLINT_AND_PRETTIER,
                            Map.entry(eslintPrettierInstaller, nv));
                });
+
+        chkSequelize.selectedProperty().addListener((ob, ov, nv) -> {
+            if(nv){
+                SGBD sgbd = cmbSgbd.getSelectionModel().getSelectedItem();
+                featuresToInstall.put(Features.SEQUELIZE,
+                        Map.entry(new Sequelize(sgbd), "")
+                );
+            } else{
+                featuresToInstall.remove(Features.SEQUELIZE);
+            }
+        });
+
+        cmbSgbd.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ob, ov, nv) -> {
+                    Map.Entry<Feature, String> featureEntry = featuresToInstall.get(Features.SEQUELIZE);
+                    Sequelize sequelize = (Sequelize) featureEntry.getKey();
+                    sequelize.setSgbd(nv);
+                });
     }
 }

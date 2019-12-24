@@ -37,12 +37,14 @@ public class YarnAppCreator implements AppCreator {
 
     @Override
     public void installFeatures(Map<Features, Map.Entry<Feature, String>> features) {
+        System.out.println("Yarn App Creator > Installing features...");
         features.values().forEach(item -> {
             Feature feature = item.getKey();
             String args = item.getValue();
 
             feature.install(this.projectDirectory, PackageManagers.YARN, args);
         });
+        System.out.println("Yarn App Creator > Yarn App Creator > Features installed successfully.");
     }
 
     private String commandBuilder(String... commands) {

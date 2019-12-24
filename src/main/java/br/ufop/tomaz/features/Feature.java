@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public interface Feature {
+    //TODO -- Make args a parameter that receives the name of the terminal application based on SO.
     void install(File projectDir, PackageManagers packageManager, String args);
 
     default void createConfigFile(File projectDir) {

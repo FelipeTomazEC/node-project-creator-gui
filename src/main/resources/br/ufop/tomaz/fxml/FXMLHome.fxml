@@ -17,17 +17,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="600.0" styleClass="container" stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufop.tomaz.controller.FXMLHomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="342.0" styleClass="container" stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufop.tomaz.controller.FXMLHomeController">
     <top>
         <FlowPane prefHeight="66.0" prefWidth="600.0" styleClass="header" BorderPane.alignment="CENTER">
             <Label styleClass="title" text="Node Project Creator" />
         </FlowPane>
     </top>
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="330.0" BorderPane.alignment="CENTER">
             <Label text="Project Name" />
             <TextField fx:id="tfProjectName" />
-            <VBox prefHeight="342.0" prefWidth="280.0" styleClass="features-container">
+            <VBox prefHeight="424.0" prefWidth="330.0" styleClass="features-container">
                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="260.0" styleClass="card">
                   <Label styleClass="title" text="Package Manager" />
                   <HBox alignment="CENTER" prefHeight="21.0" prefWidth="202.0" spacing="15">
@@ -44,26 +44,31 @@
                         <CheckBox fx:id="chkBabel" mnemonicParsing="false" text="Babel" />
                         <CheckBox fx:id="chkEslintAndPrettier" mnemonicParsing="false" text="Eslint &amp; Prettier" />
                      </HBox>
-                    <ComboBox fx:id="cmbCodeStyle" prefHeight="31.0" prefWidth="235.0" />
+                    <ComboBox fx:id="cmbCodeStyle" prefHeight="31.0" prefWidth="305.0" />
                 </VBox>
-                <VBox prefHeight="192.0" prefWidth="280.0" styleClass="card">
-                    <Label styleClass="title" text="Dependencies" />
-                    <GridPane prefWidth="263.0">
+                <VBox prefHeight="150.0" prefWidth="178.0" styleClass="card">
+                    <Label styleClass="title" text="Database" />
+                    <HBox alignment="CENTER" spacing="15.0">
+                        <CheckBox fx:id="chkMongoose" mnemonicParsing="false" text="Mongoose" />
+                        <CheckBox fx:id="chkSequelize" mnemonicParsing="false" text="Sequelize" />
+                    </HBox>
+                    <ComboBox fx:id="cmbSgbd" prefHeight="31.0" prefWidth="304.0" />
+                </VBox>
+                <VBox prefHeight="150.0" prefWidth="330.0" styleClass="card">
+                    <Label styleClass="title" text="Other Dependencies" />
+                    <GridPane prefHeight="60.0" prefWidth="300.0">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         </rowConstraints>
-                        <CheckBox fx:id="chkNodemon" mnemonicParsing="false" text="Nodemon" />
+                        <CheckBox fx:id="chkNodemon" mnemonicParsing="false" prefHeight="21.0" prefWidth="104.0" text="Nodemon" />
                         <CheckBox fx:id="chkJest" mnemonicParsing="false" text="Jest" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="chkExpress" mnemonicParsing="false" text="Express" GridPane.rowIndex="2" />
-                        <CheckBox fx:id="chkMongoose" mnemonicParsing="false" text="Mongoose" GridPane.columnIndex="1" />
-                        <CheckBox fx:id="chkSequelize" mnemonicParsing="false" text="Sequelize" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="chkLodash" mnemonicParsing="false" text="Lodash" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="chkExpress" mnemonicParsing="false" prefHeight="21.0" prefWidth="131.0" text="Express" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="chkLodash" mnemonicParsing="false" prefHeight="21.0" prefWidth="131.0" text="Lodash" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <padding>
                             <Insets left="10.0" right="10.0" />
                         </padding>

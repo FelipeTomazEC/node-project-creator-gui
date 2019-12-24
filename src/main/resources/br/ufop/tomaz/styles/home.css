@@ -1,6 +1,6 @@
 .container{
-    -fx-pref-width: 300px;
-    -fx-pref-height: 500px;
+    -fx-pref-width: 350px;
+    -fx-pref-height: 600px;
     -fx-background-color: #b6a1b6;
     -fx-padding: 10px;
 }
