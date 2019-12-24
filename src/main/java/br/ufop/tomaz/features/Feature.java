@@ -15,14 +15,18 @@ import java.util.Objects;
 public interface Feature {
     void install(File projectDir, PackageManagers packageManager, String args);
 
-    default void createConfigFile(File projectDir){
+    default void createConfigFile(File projectDir) {
         System.out.println("Method not implemented yet!");
-    };
+    }
 
-    default JSONObject getPackageJson(File projectDir){
+    default void createConfigFile(File projectDir, String args) {
+        System.out.println("Method not implemented yet!");
+    }
+
+    default JSONObject getPackageJson(File projectDir) {
         String packageJsonPath = projectDir.getPath().concat("/package.json");
-        String [] classNameArray = this.getClass().getName().split("\\.");
-        String installerName = classNameArray[classNameArray.length-1].concat(" Installer");
+        String[] classNameArray = this.getClass().getName().split("\\.");
+        String installerName = classNameArray[classNameArray.length - 1].concat(" Installer");
 
         try (Reader reader = new FileReader(packageJsonPath)) {
             JSONParser parser = new JSONParser();
@@ -35,20 +39,20 @@ public interface Feature {
             e.printStackTrace();
             return null;
         }
-    };
+    }
 
-    default boolean isThisPackageInstalled (File projectDir, String packageName){
+    default boolean isThisPackageInstalled(File projectDir, String packageName) {
         JSONObject packageJson = getPackageJson(projectDir);
         JSONObject devDependencies = (JSONObject) Objects.requireNonNull(packageJson).get("devDependencies");
         JSONObject dependencies = (JSONObject) Objects.requireNonNull(packageJson).get("dependencies");
         boolean isInstalledAsDevDependency = false;
         boolean isInstalledAsDependency = false;
 
-        if(dependencies != null){
+        if (dependencies != null) {
             isInstalledAsDependency = dependencies.containsKey(packageName);
         }
 
-        if(devDependencies != null){
+        if (devDependencies != null) {
             isInstalledAsDevDependency = devDependencies.containsKey(packageName);
         }
 

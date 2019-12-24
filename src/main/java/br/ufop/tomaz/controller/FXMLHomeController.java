@@ -19,8 +19,7 @@ public class FXMLHomeController implements Initializable {
     @FXML private TextField tfProjectName;
     @FXML private RadioButton rbNpm;
     @FXML private RadioButton rbYarn;
-    @FXML private CheckBox chkEslint;
-    @FXML private CheckBox chkPrettier;
+    @FXML private CheckBox chkEslintAndPrettier;
     @FXML private CheckBox chkBabel;
     @FXML private ComboBox<String> cmbCodeStyle;
     @FXML private CheckBox chkNodemon;
@@ -39,10 +38,7 @@ public class FXMLHomeController implements Initializable {
                 .or(radioGroup.selectedToggleProperty().isNull());
         btnCreateProject.disableProperty().bind(isCreateButtonDisable);
 
-        BooleanBinding isCodeStyleComboboxDisable = chkBabel.selectedProperty().not()
-                .and(chkEslint.selectedProperty().not())
-                .and(chkPrettier.selectedProperty().not());
-        cmbCodeStyle.disableProperty().bind(isCodeStyleComboboxDisable);
+        cmbCodeStyle.disableProperty().bind(chkEslintAndPrettier.selectedProperty().not());
 
         cmbCodeStyle.getItems().addAll("AirBnB", "Google", "Standard");
         cmbCodeStyle.getSelectionModel().selectFirst();
@@ -109,5 +105,25 @@ public class FXMLHomeController implements Initializable {
                 featuresToInstall.remove(Features.EXPRESS);
             }
         });
+
+        chkEslintAndPrettier.selectedProperty().addListener((ob, ov, nv) -> {
+            if(nv){
+                String codeStyle = cmbCodeStyle.getSelectionModel().getSelectedItem();
+                featuresToInstall.put(Features.ESLINT_AND_PRETTIER,
+                        Map.entry(new ESLintAndPrettier(), codeStyle)
+                );
+            } else{
+                featuresToInstall.remove(Features.ESLINT_AND_PRETTIER);
+            }
+        });
+
+       cmbCodeStyle.getSelectionModel()
+               .selectedItemProperty()
+               .addListener((ob, ov, nv) -> {
+                   Map.Entry<Feature, String> featureEntry = featuresToInstall.get(Features.ESLINT_AND_PRETTIER);
+                   Feature eslintPrettierInstaller = featureEntry.getKey();
+                   featuresToInstall.put(Features.ESLINT_AND_PRETTIER,
+                           Map.entry(eslintPrettierInstaller, nv));
+               });
     }
 }

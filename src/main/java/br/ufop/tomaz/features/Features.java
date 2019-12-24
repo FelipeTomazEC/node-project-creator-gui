@@ -1,5 +1,5 @@
 package br.ufop.tomaz.features;
 
 public enum Features {
-    BABEL, ESLINT, PRETTIER, NODEMON, JEST, MONGOOSE, EXPRESS
+    BABEL, ESLINT_AND_PRETTIER, NODEMON, JEST, MONGOOSE, EXPRESS
 }
