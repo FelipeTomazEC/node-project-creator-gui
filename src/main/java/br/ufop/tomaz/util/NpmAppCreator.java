@@ -42,6 +42,6 @@ public class NpmAppCreator implements AppCreator {
 
             feature.install(this.projectDirectory, PackageManagers.NPM, args);
         });
-        System.out.println("Npm App Creator > Yarn App Creator > Features installed successfully.");
+        System.out.println("Npm App Creator > Features installed successfully.");
     }
 }

@@ -149,5 +149,13 @@ public class FXMLHomeController implements Initializable {
                     Sequelize sequelize = (Sequelize) featureEntry.getKey();
                     sequelize.setSgbd(nv);
                 });
+
+        chkLodash.selectedProperty().addListener((ob, ov, nv) -> {
+            if(nv){
+                featuresToInstall.put(Features.LODASH, Map.entry(new Lodash(), ""));
+            } else{
+                featuresToInstall.remove(Features.LODASH);
+            }
+        });
     }
 }
