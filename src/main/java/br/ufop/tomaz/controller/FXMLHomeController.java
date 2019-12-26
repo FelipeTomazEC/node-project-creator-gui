@@ -71,6 +71,8 @@ public class FXMLHomeController implements Initializable {
 
     private void startMonitoringFeatures(){
         this.featuresToInstall = new HashMap<>();
+        featuresToInstall.put(Features.DOTENV, Map.entry(new Dotenv(), ""));
+
         chkBabel.selectedProperty().addListener((ob, ov, nv) -> {
             if(nv){
                 featuresToInstall.put(Features.BABEL, Map.entry(new Babel(), ""));

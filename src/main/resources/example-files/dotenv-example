@@ -1,0 +1,13 @@
+APP_NAME=my-app-name
+
+SECRET_API=lap&003#
+
+CPUS=4
+
+# Database
+DB_NAME=app-database-name
+DB_PASS=app-database-password
+DB_HOST=localhost=app-localhost
+
+# Stack
+STACK=["React Native", "ReactJS", "NodeJS"]

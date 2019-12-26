@@ -44,7 +44,7 @@ public class YarnAppCreator implements AppCreator {
 
             feature.install(this.projectDirectory, PackageManagers.YARN, args);
         });
-        System.out.println("Yarn App Creator > Yarn App Creator > Features installed successfully.");
+        System.out.println("Yarn App Creator > Features installed successfully.");
     }
 
     private String commandBuilder(String... commands) {
