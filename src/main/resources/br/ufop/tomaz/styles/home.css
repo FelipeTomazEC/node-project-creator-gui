@@ -1,63 +1,139 @@
+@font-face {
+    src: url('/br/ufop/tomaz/fonts/Montserrat-SemiBold.ttf');
+}
+
 .container{
-    -fx-pref-width: 350px;
-    -fx-pref-height: 600px;
-    -fx-background-color: #b6a1b6;
-    -fx-padding: 10px;
+    -fx-pref-width: 700px;
+    -fx-pref-height: 525px;
+    -fx-background-color: #FFFFFF;
 }
 
 .header{
-    -fx-alignment: center;
+    -fx-padding: 10;
+    -fx-border-insets: 15px;
 }
 
 .logo{
-    -fx-fit-to-height: 50px;
-    -fx-pref-height: 50px;
+    -fx-fit-to-height: 100;
 }
 
-.label{
-    -fx-font-size: 12pt;
+.config-container{
+    -fx-spacing: 20;
+    -fx-padding: 0 0 0 20;
+}
+
+.name-config-container{
+    -fx-spacing: 2;
+    -fx-pref-width: 435px;
+    -fx-alignment: center-left;
+}
+
+.name-config-container > .text-field{
+    -fx-pref-height: 30px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 5;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-size: 10pt;
+}
+
+.name-config-container > .text-field:focused{
+    -fx-focus-color: #3C873A;
+    -fx-faint-focus-color: #3C873A22;
+}
+
+.package-manager-config-container{
+    -fx-alignment: center-left;
+    -fx-spacing: 5;
+    -fx-pref-width: 200px;
 }
 
 .title{
-    -fx-text-fill: white;
-    -fx-font-size: 16pt;
-    -fx-font-weight: bold;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-text-fill: #000;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bolder;
 }
 
-.features-container{
-    -fx-spacing: 5px;
-    -fx-padding:  10 0 0 0;
+.card-container{
+    -fx-padding: 10 20 0 20;
+    -fx-hgap: 20;
 }
 
 .card{
-    -fx-font-size: 11pt;
-    -fx-alignment: center;
-    -fx-spacing: 5px;
-    -fx-background-color: #7f7f7f;
+    -fx-background-color: #303030;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 240px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+    -fx-spacing: 15;
+    -fx-padding: 15 15;
 }
 
-.card > .title{
+.card .title{
+    -fx-wrap-text: false;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 12pt;
-    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+    -fx-alignment: center;
 }
 
-.check-box{
-    -fx-text-fill: white;
+.package-item-checkbox{
+    -fx-text-fill: #fff;
+    -fx-font-size: 11pt;
+    -fx-font-family: 'Montserrat', sans-serif;
 }
 
 .radio-button{
-    -fx-text-fill: white;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-size: 11pt;
+    -fx-background-color: #ffffff;
 }
 
-.button{
-    -fx-background-color: #655565;
-    -fx-text-fill: white;
-    -fx-pref-width: 100px;
+.radio-button .radio{
+    -fx-background-color: #3C873A;
+    -fx-pref-height: 25px;
+    -fx-pref-width: 25px;
+    -fx-padding: 5px;
+}
+
+.radio-button:selected .dot{
+    -fx-background-color: #fff;
+}
+
+
+.selection-box{
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-background-color: #fff;
+    -fx-pref-width: 175px;
+    -fx-pref-height: 33px;
+    -fx-font-size: 11pt;
+}
+
+.bottom-bar{
+    -fx-background-color: #303030;
+    -fx-alignment: center-right;
     -fx-pref-height: 50px;
+    -fx-padding: 0 20 0 0;
 }
 
-.button:disabled {
-    -fx-background-color: green;
+.app-button{
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-size: 11pt;
+    -fx-pref-width: 125px;
+    -fx-pref-height: 35px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #3C873A;
+    -fx-text-fill: #fff;
+    -fx-graphic-text-gap: 5;
 }
+
+.app-button:disabled{
+    -fx-background-color: #2b6029;
+}
+
+.app-button:hover{
+    -fx-border-color: #ffe;
+    -fx-font-weight: bold;
+}
+

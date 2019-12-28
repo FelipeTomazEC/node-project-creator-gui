@@ -35,18 +35,25 @@ public class FXMLHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        BooleanBinding hasNoCodeStyle = chkEslintAndPrettier.selectedProperty()
+                .and(cmbCodeStyle.getSelectionModel().selectedItemProperty().isNull());
+
+        BooleanBinding hasNoSgbd = chkSequelize.selectedProperty()
+                .and(cmbSgbd.getSelectionModel().selectedItemProperty().isNull());
+
         BooleanBinding isCreateButtonDisable = tfProjectName.textProperty().isEmpty()
-                .or(radioGroup.selectedToggleProperty().isNull());
+                .or(radioGroup.selectedToggleProperty().isNull())
+                .or(hasNoCodeStyle)
+                .or(hasNoSgbd);
+
         btnCreateProject.disableProperty().bind(isCreateButtonDisable);
 
         cmbCodeStyle.disableProperty().bind(chkEslintAndPrettier.selectedProperty().not());
         cmbSgbd.disableProperty().bind(chkSequelize.selectedProperty().not());
 
         cmbCodeStyle.getItems().addAll("AirBnB", "Google", "Standard");
-        cmbCodeStyle.getSelectionModel().selectFirst();
 
         cmbSgbd.getItems().addAll(SGBD.values());
-        cmbSgbd.getSelectionModel().selectFirst();
 
         startMonitoringFeatures();
     }
