@@ -15,6 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ESLintAndPrettier implements Feature {
+
+    private CodeStyle codeStyle;
+
+    public ESLintAndPrettier(CodeStyle codeStyle){
+        this.codeStyle = codeStyle;
+    }
+
     @Override
     public void install(File projectDir, PackageManagers packageManager, String codeStyle) {
         System.out.println("ESLint and Prettier Installer > Installing...");
@@ -64,36 +71,9 @@ public class ESLintAndPrettier implements Feature {
                 "eslint-plugin-import"
         };
 
-        String[] standardStylePackages = {
-                "eslint-config-standard",
-                "eslint-plugin-standard",
-                "eslint-plugin-promise",
-                "eslint-plugin-node",
-                "eslint-config-prettier-standard",
-                "prettier-config-standard",
-        };
-
-        String[] googleStylePackages = {
-                "eslint-config-google"
-        };
-
-        String[] airbnbStylePackages = {
-                "eslint-config-airbnb-base"
-        };
-
-        List<String> packagesList = new ArrayList<>(Arrays.asList(commonPackageNames));
-
-        if (style.equalsIgnoreCase("standard")) {
-            packagesList.addAll(Arrays.asList(standardStylePackages));
-        }
-
-        if(style.equalsIgnoreCase("airbnb")){
-            packagesList.addAll(Arrays.asList(airbnbStylePackages));
-        }
-
-        if(style.equalsIgnoreCase("google")){
-            packagesList.addAll(Arrays.asList(googleStylePackages));
-        }
+        List<String> packagesList = new ArrayList<>();
+        packagesList.addAll(Arrays.asList(commonPackageNames));
+        packagesList.addAll(Arrays.asList(this.codeStyle.getRequiredPackages()));
 
         return packagesList;
     }
@@ -117,16 +97,7 @@ public class ESLintAndPrettier implements Feature {
         JSONObject rules = new JSONObject();
         JSONArray rule1 = new JSONArray();
 
-        String extendStyle;
-        if(style.equalsIgnoreCase("standard")){
-            extendStyle = "prettier-standard";
-        }else if(style.equalsIgnoreCase("airbnb")){
-            extendStyle = "airbnb-base";
-        }else{
-            extendStyle = "google";
-        }
-
-        extendsArray.addAll(Arrays.asList(extendStyle, "prettier"));
+        extendsArray.addAll(Arrays.asList(this.codeStyle.getExtendName(), "prettier"));
         plugins.add("prettier");
         rule1.add("error");
         rules.put("prettier/prettier", rule1);
@@ -144,5 +115,9 @@ public class ESLintAndPrettier implements Feature {
         config.put("singleQuote", true);
 
         return config;
+    }
+
+    public void setCodeStyle(CodeStyle codeStyle) {
+        this.codeStyle = codeStyle;
     }
 }

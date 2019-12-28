@@ -21,7 +21,7 @@ public class FXMLHomeController implements Initializable {
     @FXML private RadioButton rbYarn;
     @FXML private CheckBox chkEslintAndPrettier;
     @FXML private CheckBox chkBabel;
-    @FXML private ComboBox<String> cmbCodeStyle;
+    @FXML private ComboBox<CodeStyle> cmbCodeStyle;
     @FXML private ComboBox<SGBD> cmbSgbd;
     @FXML private CheckBox chkNodemon;
     @FXML private CheckBox chkJest;
@@ -51,8 +51,7 @@ public class FXMLHomeController implements Initializable {
         cmbCodeStyle.disableProperty().bind(chkEslintAndPrettier.selectedProperty().not());
         cmbSgbd.disableProperty().bind(chkSequelize.selectedProperty().not());
 
-        cmbCodeStyle.getItems().addAll("AirBnB", "Google", "Standard");
-
+        cmbCodeStyle.getItems().addAll(CodeStyle.values());
         cmbSgbd.getItems().addAll(SGBD.values());
 
         startMonitoringFeatures();
@@ -72,7 +71,6 @@ public class FXMLHomeController implements Initializable {
             
             appCreator.createApp();
             appCreator.installFeatures(this.featuresToInstall);
-
         }
     }
 
@@ -122,9 +120,9 @@ public class FXMLHomeController implements Initializable {
 
         chkEslintAndPrettier.selectedProperty().addListener((ob, ov, nv) -> {
             if(nv){
-                String codeStyle = cmbCodeStyle.getSelectionModel().getSelectedItem();
+                CodeStyle style = cmbCodeStyle.getSelectionModel().getSelectedItem();
                 featuresToInstall.put(Features.ESLINT_AND_PRETTIER,
-                        Map.entry(new ESLintAndPrettier(), codeStyle)
+                        Map.entry(new ESLintAndPrettier(style), "")
                 );
             } else{
                 featuresToInstall.remove(Features.ESLINT_AND_PRETTIER);
@@ -135,9 +133,9 @@ public class FXMLHomeController implements Initializable {
                .selectedItemProperty()
                .addListener((ob, ov, nv) -> {
                    Map.Entry<Feature, String> featureEntry = featuresToInstall.get(Features.ESLINT_AND_PRETTIER);
-                   Feature eslintPrettierInstaller = featureEntry.getKey();
-                   featuresToInstall.put(Features.ESLINT_AND_PRETTIER,
-                           Map.entry(eslintPrettierInstaller, nv));
+                   ESLintAndPrettier eslintPrettierInstaller =
+                           (ESLintAndPrettier) featureEntry.getKey();
+                   eslintPrettierInstaller.setCodeStyle(nv);
                });
 
         chkSequelize.selectedProperty().addListener((ob, ov, nv) -> {
