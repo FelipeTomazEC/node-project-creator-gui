@@ -20,10 +20,6 @@ public interface Feature {
         System.out.println("Method not implemented yet!");
     }
 
-    default void createConfigFile(File projectDir, String args) {
-        System.out.println("Method not implemented yet!");
-    }
-
     default JSONObject getPackageJson(File projectDir) {
         String packageJsonPath = projectDir.getPath().concat("/package.json");
         String[] classNameArray = this.getClass().getName().split("\\.");
@@ -59,5 +55,4 @@ public interface Feature {
 
         return isInstalledAsDependency || isInstalledAsDevDependency;
     }
-
 }

@@ -23,10 +23,10 @@ public class ESLintAndPrettier implements Feature {
     }
 
     @Override
-    public void install(File projectDir, PackageManagers packageManager, String codeStyle) {
+    public void install(File projectDir, PackageManagers packageManager, String args) {
         System.out.println("ESLint and Prettier Installer > Installing...");
 
-        List<String> packagesToInstall = getPackages(codeStyle);
+        List<String> packagesToInstall = getPackages();
         String terminalAppName = "powershell.exe";
         List<ProcessBuilder> processBuilderList = packagesToInstall.stream()
                 .map(pkg -> getCommand(packageManager, pkg))
@@ -35,14 +35,14 @@ public class ESLintAndPrettier implements Feature {
 
         processBuilderList.forEach(ProcessExecutor::execute);
 
-        createConfigFile(projectDir, codeStyle);
+        createConfigFile(projectDir);
 
         System.out.println("ESLint and Prettier Installer > ESLint and Prettier installed successfully.");
     }
 
     @Override
-    public void createConfigFile(File projectDir, String codeStyle) {
-        JSONObject eslintConfig = eslintConfigJson(codeStyle);
+    public void createConfigFile(File projectDir) {
+        JSONObject eslintConfig = eslintConfigJson();
         JSONObject prettierConfig = prettierConfigJson();
         String eslintConfigFilePath = projectDir.getPath().concat("/.eslintrc.json");
         String prettierConfigFilePath = projectDir.getPath().concat("/.prettierrc");
@@ -62,7 +62,7 @@ public class ESLintAndPrettier implements Feature {
         }
     }
 
-    private List<String> getPackages(String style) {
+    private List<String> getPackages() {
         String[] commonPackageNames = {
                 "eslint",
                 "prettier",
@@ -90,7 +90,7 @@ public class ESLintAndPrettier implements Feature {
         return processBuilder.directory(projectDir);
     }
 
-    private JSONObject eslintConfigJson(String style) {
+    private JSONObject eslintConfigJson() {
         JSONObject config = new JSONObject();
         JSONArray extendsArray = new JSONArray();
         JSONArray plugins = new JSONArray();
