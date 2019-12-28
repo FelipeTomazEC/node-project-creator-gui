@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -14,6 +15,11 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
+        stage.setTitle("Node Project Creator");
+        Image icon = new Image(getClass().getResourceAsStream("/br/ufop/tomaz/icons/logo-small.png"));
+        stage.getIcons().add(icon);
+
+        stage.setResizable(false);
 
         Parent root = FXMLLoader.load(App.class.getResource("/br/ufop/tomaz/fxml/FXMLHome.fxml"));
         Scene scene = new Scene(root);
