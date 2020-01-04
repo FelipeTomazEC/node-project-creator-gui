@@ -15,93 +15,98 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="342.0" styleClass="container" stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufop.tomaz.controller.FXMLHomeController">
-   <top>
-      <HBox styleClass="header" BorderPane.alignment="CENTER">
-         <ImageView fitHeight="100.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
-            <Image url="@../icons/logo.png" />
-         </ImageView>
-      </HBox>
-   </top>
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">
-         <HBox prefHeight="71.0" prefWidth="700.0" styleClass="config-container">
-            <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="435.0" styleClass="name-config-container">
-               <Label styleClass="title" text="Project Name" />
-               <TextField fx:id="tfProjectName" prefHeight="25.0" prefWidth="430.0" />
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="package-manager-config-container">
-               <Label styleClass="title" text="Package Manager" />
-               <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="120.0" spacing="20.0">
-                  <RadioButton fx:id="rbNpm" mnemonicParsing="false" selected="true" text="NPM">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="radioGroup" />
-                     </toggleGroup></RadioButton>
-                  <RadioButton fx:id="rbYarn" mnemonicParsing="false" text="YARN" toggleGroup="$radioGroup" />
-               </HBox>
-            </VBox>
-         </HBox>
-         <GridPane styleClass="card-container">
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" />
-               <ColumnConstraints hgrow="SOMETIMES" />
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-            </rowConstraints>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="card">
-               <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="207.0">
-                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../icons/database.png" />
-                  </ImageView>
-                  <Label prefHeight="37.0" prefWidth="93.0" styleClass="title" text="Database" />
-               </HBox>
-               <CheckBox fx:id="chkMongoose" mnemonicParsing="false" styleClass="package-item-checkbox" text="Mongoose" />
-               <CheckBox fx:id="chkSequelize" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Sequelize" />
-               <ComboBox fx:id="cmbSgbd" prefHeight="25.0" prefWidth="160.0" promptText="Select a SGBD" styleClass="selection-box" />
-            </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="card" GridPane.columnIndex="1">
-                <HBox alignment="TOP_CENTER">
-                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                       <Image url="@../icons/code.png" />
-                    </ImageView>
-                    <Label prefHeight="37.0" prefWidth="102.0" styleClass="title" text="Code Style" />
-                </HBox>
-               <CheckBox fx:id="chkBabel" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Babel" />
-               <CheckBox fx:id="chkEslintAndPrettier" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Prettier &amp; ESLint" />
-               <ComboBox fx:id="cmbCodeStyle" prefWidth="150.0" promptText="Select a code style" styleClass="selection-box" />
-            </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="412.0" styleClass="card" GridPane.columnIndex="2">
-                <HBox alignment="TOP_CENTER">
-                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                       <Image url="@../icons/dependencies.png" />
-                    </ImageView>
-                    <Label prefHeight="37.0" prefWidth="162.0" styleClass="title" text="Other Features" wrapText="true" />
-                </HBox>
-               <CheckBox fx:id="chkExpress" mnemonicParsing="false" styleClass="package-item-checkbox" text="Express" />
-               <CheckBox fx:id="chkJest" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Jest" />
-               <CheckBox fx:id="chkLodash" layoutX="10.0" layoutY="54.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Lodash" />
-               <CheckBox fx:id="chkNodemon" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Nodemon" />
-            </VBox>
-         </GridPane>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox prefHeight="49.0" prefWidth="700.0" styleClass="bottom-bar" BorderPane.alignment="CENTER">
-          <VBox prefHeight="50.0" prefWidth="563.0">
-              <padding>
-                  <Insets left="20.0" />
-              </padding>
+<StackPane fx:id="stackContainer" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufop.tomaz.controller.FXMLHomeController">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="342.0" styleClass="container" stylesheets="@../styles/home.css">
+        <top>
+          <HBox styleClass="header" BorderPane.alignment="CENTER">
+              <ImageView fitHeight="100.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                  <Image url="@../icons/logo.png" />
+              </ImageView>
+          </HBox>
+        </top>
+        <center>
+          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+              <HBox prefHeight="71.0" prefWidth="700.0" styleClass="config-container">
+                  <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="435.0" styleClass="name-config-container">
+                      <Label styleClass="title" text="Project Name" />
+                      <TextField fx:id="tfProjectName" prefHeight="25.0" prefWidth="430.0" />
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="package-manager-config-container">
+                      <Label styleClass="title" text="Package Manager" />
+                      <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="120.0" spacing="20.0">
+                          <RadioButton fx:id="rbNpm" mnemonicParsing="false" selected="true" text="NPM">
+                              <toggleGroup>
+                                  <ToggleGroup fx:id="radioGroup" />
+                              </toggleGroup>
+                          </RadioButton>
+                          <RadioButton fx:id="rbYarn" mnemonicParsing="false" text="YARN" toggleGroup="$radioGroup" />
+                      </HBox>
+                  </VBox>
+              </HBox>
+              <GridPane styleClass="card-container">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints />
+                  </rowConstraints>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="card">
+                      <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="207.0">
+                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../icons/database.png" />
+                          </ImageView>
+                          <Label prefHeight="37.0" prefWidth="93.0" styleClass="title" text="Database" />
+                      </HBox>
+                      <CheckBox fx:id="chkMongoose" mnemonicParsing="false" styleClass="package-item-checkbox" text="Mongoose" />
+                      <CheckBox fx:id="chkSequelize" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Sequelize" />
+                      <ComboBox fx:id="cmbSgbd" prefHeight="25.0" prefWidth="160.0" promptText="Select a SGBD" styleClass="selection-box" />
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="card" GridPane.columnIndex="1">
+                      <HBox alignment="TOP_CENTER">
+                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../icons/code.png" />
+                          </ImageView>
+                          <Label prefHeight="37.0" prefWidth="102.0" styleClass="title" text="Code Style" />
+                      </HBox>
+                      <CheckBox fx:id="chkBabel" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Babel" />
+                      <CheckBox fx:id="chkEslintAndPrettier" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Prettier &amp; ESLint" />
+                      <ComboBox fx:id="cmbCodeStyle" prefWidth="150.0" promptText="Select a code style" styleClass="selection-box" />
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="412.0" styleClass="card" GridPane.columnIndex="2">
+                      <HBox alignment="TOP_CENTER">
+                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../icons/dependencies.png" />
+                          </ImageView>
+                          <Label prefHeight="37.0" prefWidth="162.0" styleClass="title" text="Other Features" wrapText="true" />
+                      </HBox>
+                      <CheckBox fx:id="chkExpress" mnemonicParsing="false" styleClass="package-item-checkbox" text="Express" />
+                      <CheckBox fx:id="chkJest" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Jest" />
+                      <CheckBox fx:id="chkLodash" layoutX="10.0" layoutY="54.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Lodash" />
+                      <CheckBox fx:id="chkNodemon" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" styleClass="package-item-checkbox" text="Nodemon" />
+                  </VBox>
+              </GridPane>
           </VBox>
-         <Button fx:id="btnCreateProject" mnemonicParsing="false" onAction="#createProject" styleClass="app-button" text="Create">
-            <graphic>
-                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../icons/create.png" />
-                </ImageView>
-            </graphic></Button>
-      </HBox>
-   </bottom>
-</BorderPane>
+        </center>
+        <bottom>
+          <HBox prefHeight="49.0" prefWidth="700.0" styleClass="bottom-bar" BorderPane.alignment="CENTER">
+              <VBox prefHeight="50.0" prefWidth="563.0">
+                  <padding>
+                      <Insets left="20.0" />
+                  </padding>
+              </VBox>
+              <Button fx:id="btnCreateProject" mnemonicParsing="false" onAction="#createProject" styleClass="app-button" text="Create">
+                  <graphic>
+                      <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                          <Image url="@../icons/create.png" />
+                      </ImageView>
+                  </graphic>
+              </Button>
+          </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

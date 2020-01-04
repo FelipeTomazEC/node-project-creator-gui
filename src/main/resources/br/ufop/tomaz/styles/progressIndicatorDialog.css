@@ -1,7 +1,7 @@
 .container{
     -fx-pref-width: 400px;
     -fx-pref-height: 250px;
-    -fx-border-color: #303030;
+    -fx-border-color: #efefef;
     -fx-border-width: 5px;
 }
 

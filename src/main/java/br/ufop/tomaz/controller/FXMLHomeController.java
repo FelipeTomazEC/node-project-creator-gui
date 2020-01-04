@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,21 +27,37 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 public class FXMLHomeController implements Initializable {
-    @FXML private TextField tfProjectName;
-    @FXML private RadioButton rbNpm;
-    @FXML private RadioButton rbYarn;
-    @FXML private CheckBox chkEslintAndPrettier;
-    @FXML private CheckBox chkBabel;
-    @FXML private ComboBox<CodeStyle> cmbCodeStyle;
-    @FXML private ComboBox<SGBD> cmbSgbd;
-    @FXML private CheckBox chkNodemon;
-    @FXML private CheckBox chkJest;
-    @FXML private CheckBox chkExpress;
-    @FXML private CheckBox chkMongoose;
-    @FXML private CheckBox chkSequelize;
-    @FXML private CheckBox chkLodash;
-    @FXML private Button btnCreateProject;
-    @FXML private ToggleGroup radioGroup;
+    @FXML private StackPane stackContainer;
+    @FXML
+    private TextField tfProjectName;
+    @FXML
+    private RadioButton rbNpm;
+    @FXML
+    private RadioButton rbYarn;
+    @FXML
+    private CheckBox chkEslintAndPrettier;
+    @FXML
+    private CheckBox chkBabel;
+    @FXML
+    private ComboBox<CodeStyle> cmbCodeStyle;
+    @FXML
+    private ComboBox<SGBD> cmbSgbd;
+    @FXML
+    private CheckBox chkNodemon;
+    @FXML
+    private CheckBox chkJest;
+    @FXML
+    private CheckBox chkExpress;
+    @FXML
+    private CheckBox chkMongoose;
+    @FXML
+    private CheckBox chkSequelize;
+    @FXML
+    private CheckBox chkLodash;
+    @FXML
+    private Button btnCreateProject;
+    @FXML
+    private ToggleGroup radioGroup;
     private Map<Features, Entry<Feature, String>> featuresToInstall;
 
     @Override
@@ -78,10 +96,12 @@ public class FXMLHomeController implements Initializable {
 
         if (directoryToSave != null) {
             final int numberOfFeatures = featuresToInstall.size();
-          Entry<Feature, String>[] featuresList = featuresToInstall.values()
-                        .toArray(new Entry[numberOfFeatures]);
+            Entry<Feature, String>[] featuresList = featuresToInstall.values()
+                    .toArray(new Entry[numberOfFeatures]);
             try {
+                blurTheHomeScene();
                 this.openProgressInstallerDialog(projectName, directoryToSave, packageManager, featuresList);
+                unBlurTheHomeScene();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -200,37 +220,18 @@ public class FXMLHomeController implements Initializable {
         dialogStage.setResizable(false);
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.initOwner(App.getWindow());
+        dialogStage.setOnCloseRequest(event -> event.consume());
         dialogStage.setScene(dialogScene);
         dialogStage.showAndWait();
     }
 
-//    private Task<Void> getInstallFeaturesTask(AppCreator creator) {
-//
-//        return new Task<Void>() {
-//            @Override
-//            protected Void call() throws Exception {
-//                final int numberOfFeatures = featuresToInstall.size();
-//                Entry<Feature, String>[] featuresList = featuresToInstall.values()
-//                        .toArray(new Entry[numberOfFeatures]);
-//
-//                for (int i = 0; i < numberOfFeatures; i++) {
-//                    Feature feature = featuresList[i].getKey();
-//                    String args = featuresList[i].getValue();
-//
-//                    updateMessage("Installing ".concat(feature.getName()).concat("..."));
-//                    creator.installFeature(feature, args);
-//                    updateProgress(i, numberOfFeatures);
-//                    updateMessage(feature.getName().concat(" installed successfully."));
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void done() {
-//                super.done();
-//                updateMessage("All features were installed successfully.");
-//                updateProgress(1,1);
-//            }
-//        };
-//    }
+    private void blurTheHomeScene() {
+        AnchorPane blurryPane = new AnchorPane();
+        blurryPane.setStyle("-fx-background-color: rgba(48,48,48,0.66)");
+        stackContainer.getChildren().add(1, blurryPane);
+    }
+
+    public void unBlurTheHomeScene(){
+        stackContainer.getChildren().remove(1);
+    }
 }

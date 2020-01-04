@@ -16,7 +16,7 @@
            <Button fx:id="btnFinish" cancelButton="true" mnemonicParsing="false" text="Finish">
             <graphic>
                 <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../icons/cancel.png" />
+                    <Image url="@../icons/finish.png" />
                 </ImageView>
             </graphic></Button>
        </HBox>
