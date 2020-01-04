@@ -55,4 +55,8 @@ public interface Feature {
 
         return isInstalledAsDependency || isInstalledAsDevDependency;
     }
+
+    default String getName(){
+        return this.getClass().getName();
+    }
 }

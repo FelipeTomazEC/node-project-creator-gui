@@ -38,4 +38,9 @@ public class Dotenv implements Feature {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String getName() {
+        return "Dotenv";
+    }
 }

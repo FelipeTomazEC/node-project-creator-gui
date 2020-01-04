@@ -47,9 +47,8 @@ public class YarnAppCreator implements AppCreator {
         System.out.println("Yarn App Creator > Features installed successfully.");
     }
 
-    private String commandBuilder(String... commands) {
-        return Arrays.stream(commands)
-                .reduce((acc, current) -> acc.concat(" && ").concat(current))
-                .orElse("");
+    @Override
+    public void installFeature(Feature feature, String args) {
+        feature.install(this.projectDirectory, PackageManagers.YARN, args);
     }
 }

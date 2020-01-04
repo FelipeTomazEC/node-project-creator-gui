@@ -19,4 +19,9 @@ public class Lodash implements Feature {
 
         System.out.println("Lodash Installer > Lodash installed successfully.");
     }
+
+    @Override
+    public String getName() {
+        return "Lodash";
+    }
 }

@@ -20,4 +20,9 @@ public class Mongoose implements Feature {
 
         System.out.println("Mongoose Installer > Mongoose installed successfully.");
     }
+
+    @Override
+    public String getName() {
+        return "Mongoose";
+    }
 }

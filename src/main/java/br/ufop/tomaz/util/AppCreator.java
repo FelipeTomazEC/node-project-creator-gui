@@ -51,4 +51,6 @@ public interface AppCreator {
     }
 
     void installFeatures(Map<Features, Map.Entry<Feature, String>> features);
+
+    void installFeature(Feature feature, String args);
 }

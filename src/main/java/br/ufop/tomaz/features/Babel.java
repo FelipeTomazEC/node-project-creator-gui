@@ -148,4 +148,8 @@ public class Babel implements Feature {
         return plugins;
     }
 
+    @Override
+    public String getName() {
+        return "Babel";
+    }
 }

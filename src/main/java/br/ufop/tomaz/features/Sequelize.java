@@ -83,5 +83,10 @@ public class Sequelize implements Feature {
     public void setSgbd(SGBD sgbd) {
         this.sgbd = sgbd;
     }
+
+    @Override
+    public String getName() {
+        return "Sequelize";
+    }
 }
 

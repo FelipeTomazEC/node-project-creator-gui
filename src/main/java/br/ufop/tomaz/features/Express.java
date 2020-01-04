@@ -40,4 +40,9 @@ public class Express implements Feature {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String getName() {
+        return "Express";
+    }
 }

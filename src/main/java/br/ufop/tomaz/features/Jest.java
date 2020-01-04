@@ -69,7 +69,12 @@ public class Jest implements Feature {
         }
     }
 
-//    @Override
+    @Override
+    public String getName() {
+        return "Jest";
+    }
+
+    //    @Override
 //    public void createConfigFile(File projectDir) {
 //        boolean isBabelInstalled = isThisPackageInstalled(projectDir, "@babel/core");
 //

@@ -44,4 +44,9 @@ public class NpmAppCreator implements AppCreator {
         });
         System.out.println("Npm App Creator > Features installed successfully.");
     }
+
+    @Override
+    public void installFeature(Feature feature, String args) {
+        feature.install(this.projectDirectory, PackageManagers.NPM, args);
+    }
 }

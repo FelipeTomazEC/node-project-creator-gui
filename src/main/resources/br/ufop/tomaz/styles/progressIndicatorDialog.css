@@ -1,0 +1,55 @@
+.container{
+    -fx-pref-width: 400px;
+    -fx-pref-height: 250px;
+    -fx-border-color: #303030;
+    -fx-border-width: 5px;
+}
+
+.button-bar{
+    -fx-pref-height: 45px;
+    -fx-pref-width: 400px;
+    -fx-background-color: #303030;
+    -fx-alignment: center-right;
+    -fx-padding: 0 10 0 0;
+}
+
+.button{
+    -fx-pref-width: 108px;
+    -fx-pref-height: 30px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #3C873A;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+}
+
+.content-container{
+    -fx-background-color: #fff;
+    -fx-alignment: center;
+}
+
+.status-message{
+    -fx-text-fill: #000;
+    -fx-font-size: 20pt;
+}
+
+.progress-bar{
+    -fx-pref-height: 30px;
+    -fx-pref-width: 370px;
+}
+
+.progress-bar .track{
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.progress-bar .bar{
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #3C873A;
+}
+
+.percentage-completed{
+    -fx-font-size: 12pt;
+}

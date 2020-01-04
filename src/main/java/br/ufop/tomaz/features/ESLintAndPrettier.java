@@ -120,4 +120,9 @@ public class ESLintAndPrettier implements Feature {
     public void setCodeStyle(CodeStyle codeStyle) {
         this.codeStyle = codeStyle;
     }
+
+    @Override
+    public String getName() {
+        return "ESLint and Prettier";
+    }
 }

@@ -50,4 +50,9 @@ public class Nodemon implements Feature {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String getName() {
+        return "Nodemon";
+    }
 }

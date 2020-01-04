@@ -1,5 +1,6 @@
 package br.ufop.tomaz;
 
+import br.ufop.tomaz.controller.Screen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,8 +21,7 @@ public class App extends Application {
         stage.getIcons().add(icon);
 
         stage.setResizable(false);
-
-        Parent root = FXMLLoader.load(App.class.getResource("/br/ufop/tomaz/fxml/FXMLHome.fxml"));
+        Parent root = FXMLLoader.load(App.class.getResource(Screen.HOME.getFxmlFilePath()));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
