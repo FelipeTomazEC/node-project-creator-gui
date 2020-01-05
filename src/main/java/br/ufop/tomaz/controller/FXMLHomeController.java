@@ -28,36 +28,21 @@ import java.util.ResourceBundle;
 
 public class FXMLHomeController implements Initializable {
     @FXML private StackPane stackContainer;
-    @FXML
-    private TextField tfProjectName;
-    @FXML
-    private RadioButton rbNpm;
-    @FXML
-    private RadioButton rbYarn;
-    @FXML
-    private CheckBox chkEslintAndPrettier;
-    @FXML
-    private CheckBox chkBabel;
-    @FXML
-    private ComboBox<CodeStyle> cmbCodeStyle;
-    @FXML
-    private ComboBox<SGBD> cmbSgbd;
-    @FXML
-    private CheckBox chkNodemon;
-    @FXML
-    private CheckBox chkJest;
-    @FXML
-    private CheckBox chkExpress;
-    @FXML
-    private CheckBox chkMongoose;
-    @FXML
-    private CheckBox chkSequelize;
-    @FXML
-    private CheckBox chkLodash;
-    @FXML
-    private Button btnCreateProject;
-    @FXML
-    private ToggleGroup radioGroup;
+    @FXML private TextField tfProjectName;
+    @FXML private RadioButton rbNpm;
+    @FXML private RadioButton rbYarn;
+    @FXML private CheckBox chkEslintAndPrettier;
+    @FXML private CheckBox chkBabel;
+    @FXML private ComboBox<CodeStyle> cmbCodeStyle;
+    @FXML private ComboBox<SGBD> cmbSgbd;
+    @FXML private CheckBox chkNodemon;
+    @FXML private CheckBox chkJest;
+    @FXML private CheckBox chkExpress;
+    @FXML private CheckBox chkMongoose;
+    @FXML private CheckBox chkSequelize;
+    @FXML private CheckBox chkLodash;
+    @FXML private Button btnCreateProject;
+    @FXML private ToggleGroup radioGroup;
     private Map<Features, Entry<Feature, String>> featuresToInstall;
 
     @Override
@@ -68,8 +53,10 @@ public class FXMLHomeController implements Initializable {
         BooleanBinding hasNoSgbd = chkSequelize.selectedProperty()
                 .and(cmbSgbd.getSelectionModel().selectedItemProperty().isNull());
 
+        BooleanBinding hasNoPackageManager = radioGroup.selectedToggleProperty().isNull();
+
         BooleanBinding isCreateButtonDisable = tfProjectName.textProperty().isEmpty()
-                .or(radioGroup.selectedToggleProperty().isNull())
+                .or(hasNoPackageManager)
                 .or(hasNoCodeStyle)
                 .or(hasNoSgbd);
 

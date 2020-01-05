@@ -31,7 +31,6 @@ runtime {
                 '--win-per-user-install',
                 '--win-dir-chooser'
         ]
-
     }
 }
 
@@ -45,6 +44,4 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-
-
 }
