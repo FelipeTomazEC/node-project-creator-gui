@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'org.beryx.runtime' version '1.8.0'
 }
 
@@ -16,8 +16,10 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
-mainClassName = "br.ufop.tomaz.Launcher"
-applicationName = "Node Project Creator"
+application{
+    mainClassName = "br.ufop.tomaz.Launcher"
+    applicationName = "Node Project Creator"
+}
 
 runtime {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
