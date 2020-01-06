@@ -32,14 +32,14 @@ and, after you enjoy a cup of coffee, your new project will be ready for you.
 
 ### Screenshots
 
-<img src="https://user-images.githubusercontent.com/36672867/71786149-4df3de00-2fe7-11ea-8146-1fc081762772.png" alt="drawing" width="400"/>
+<img src="https://user-images.githubusercontent.com/36672867/71840798-c799d380-309c-11ea-953d-7fc3f96a4c07.png" alt="drawing" width="400"/>
 <br>
-<img src="https://user-images.githubusercontent.com/36672867/71786147-4d5b4780-2fe7-11ea-9df1-e37421522dc7.png" alt="drawing" width="400"/>
+<img src="https://user-images.githubusercontent.com/36672867/71840800-c799d380-309c-11ea-9895-fa6c513fbeb2.png" alt="drawing" width="400"/>
 
 ### Download
-You can get a installer for NODE PROJECT CREATOR tool on the following link.
+You can get an installer for NODE PROJECT CREATOR tool by clicking the button below.
 
-[![icons8-download-from-cloud-50](https://user-images.githubusercontent.com/36672867/71794910-57e70280-3022-11ea-8d55-9b4a425328f0.png)](https://www.google.com)
+[![Download](https://user-images.githubusercontent.com/36672867/71842308-1a28bf00-30a0-11ea-81c5-f523219d5549.png)](https://mega.nz/#!KLAzUICb!DS-xwGpEwxxGMZPceflumlxA9LQ6KJevcO7VYMoaBlE)
 
 *P.S.: Currently, the tool is only available on Windows 10.*
 
