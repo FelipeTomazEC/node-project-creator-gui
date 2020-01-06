@@ -5,6 +5,9 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -21,11 +24,24 @@
 <StackPane fx:id="stackContainer" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufop.tomaz.controller.FXMLHomeController">
     <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="342.0" styleClass="container" stylesheets="@../styles/home.css">
         <top>
-          <HBox styleClass="header" BorderPane.alignment="CENTER">
-              <ImageView fitHeight="100.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
-                  <Image url="@../icons/logo.png" />
-              </ImageView>
-          </HBox>
+         <VBox BorderPane.alignment="CENTER">
+            <children>
+               <MenuBar prefHeight="25.0" prefWidth="719.0">
+                 <menus>
+                   <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                       <MenuItem mnemonicParsing="false" onAction="#openGitHubPage" text="About" />
+                     </items>
+                   </Menu>
+                 </menus>
+               </MenuBar>
+                <HBox styleClass="header">
+                    <ImageView fitHeight="100.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                        <Image url="@../icons/logo.png" />
+                    </ImageView>
+                </HBox>
+            </children>
+         </VBox>
         </top>
         <center>
           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">

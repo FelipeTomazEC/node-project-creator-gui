@@ -20,6 +20,9 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -220,5 +223,10 @@ public class FXMLHomeController implements Initializable {
 
     public void unBlurTheHomeScene(){
         stackContainer.getChildren().remove(1);
+    }
+
+    @FXML
+    private void openGitHubPage() {
+        App.OpenGitHubPage();
     }
 }

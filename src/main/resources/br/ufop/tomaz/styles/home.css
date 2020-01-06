@@ -13,6 +13,16 @@
     -fx-border-insets: 15px;
 }
 
+.menu-bar{
+    -fx-background-color: #fff;
+}
+.menu:showing,
+.menu-item:hover,
+.menu-button:hover{
+    -fx-background-color: #3C873A;
+    -fx-text-fill: #fff;
+}
+
 .logo{
     -fx-fit-to-height: 100;
 }
