@@ -22,11 +22,14 @@ application{
 }
 
 runtime {
+    //javaHome = 'C:/Program Files/OpenJDK/openjdk-11.0.5_10'
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     jpackage {
         jpackageHome = 'C:/Program Files/OpenJDK/openjdk-14.0.0/jdk-14'
+        imageName = 'Node Project Creator'
         imageOptions += ['--icon', 'src/main/resources/br/ufop/tomaz/icons/logo-small.ico']
         installerType = 'msi'
+        installerName = "Node Project Creator"
         installerOptions = [
                 '--win-menu',
                 '--win-shortcut',
