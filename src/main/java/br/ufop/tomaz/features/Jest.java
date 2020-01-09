@@ -2,12 +2,12 @@ package br.ufop.tomaz.features;
 
 import br.ufop.tomaz.util.PackageManagers;
 import br.ufop.tomaz.util.ProcessExecutor;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class Jest implements Feature {
         queue.forEach(ProcessExecutor::execute);
 
         insertScripts(projectDir);
-        //createConfigFile(projectDir);
+        createConfigFile(projectDir);
 
         System.out.println("Jest Installer > Jest installed successfully.");
     }
@@ -46,10 +46,11 @@ public class Jest implements Feature {
 
     private String[] getPackagesToInstall(File projectDir) {
         boolean isBabelInstalled = isThisPackageInstalled(projectDir, "@babel/core");
+        boolean isEslintInstalled = isThisPackageInstalled(projectDir, "eslint");
 
-        return (isBabelInstalled)
-                ? "jest babel-jest".split(" ")
-                : "jest".split(" ");
+        String packages = (isBabelInstalled) ? "jest babel-jest" : "jest";
+        packages = (isEslintInstalled) ? packages.concat(" eslint-plugin-jest") : packages;
+        return packages.split(" ");
     }
 
     private void insertScripts(File projectDir) {
@@ -61,11 +62,46 @@ public class Jest implements Feature {
 
         String packageJsonPath = projectDir.getPath().concat("/package.json");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(packageJsonPath))) {
+
             writer.write(packageJson.toJSONString().replace("\\", ""));
-            writer.flush();
+
         } catch (IOException e) {
             System.err.println("Jest Installer > Occurred some error when inserting scripts on package.json");
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createConfigFile(File projectDir) {
+        boolean isEslintInstalled = isThisPackageInstalled(projectDir, "eslint");
+        if (isEslintInstalled) {
+            String eslintFilePath = projectDir.getPath().concat("/.eslintrc.json");
+            JSONObject config = getEslintConfigJson(projectDir);
+            try (Writer writer = new BufferedWriter(new FileWriter(eslintFilePath))) {
+                JSONArray extendsArray = (JSONArray) config.get("extends");
+                JSONArray plugins = (JSONArray) config.get("plugins");
+                JSONObject rules = (JSONObject) config.get("rules");
+
+                extendsArray.add("plugin:jest/recommended");
+                extendsArray.add( "plugin:jest/style");
+                plugins.add("jest");
+                rules.put("jest/no-disabled-tests", "warn");
+                rules.put("jest/no-focused-tests", "error");
+                rules.put("jest/no-identical-title", "error");
+                rules.put("jest/prefer-to-have-length", "warn");
+                rules.put("jest/valid-expect", "error");
+
+                config.replace("extends", extendsArray);
+                config.replace("plugins", plugins);
+                config.replace("rules", rules);
+
+                writer.write(config.toJSONString().replace("\\", ""));
+                writer.flush();
+
+            } catch (IOException e) {
+                System.err.println("Jest Installer > " +
+                        "Occurred and error when trying to create config files.");
+            }
         }
     }
 
@@ -74,38 +110,16 @@ public class Jest implements Feature {
         return "Jest";
     }
 
-    //    @Override
-//    public void createConfigFile(File projectDir) {
-//        boolean isBabelInstalled = isThisPackageInstalled(projectDir, "@babel/core");
-//
-//        if (isBabelInstalled) {
-//            String babelConfigFilePath = projectDir.getPath().concat("/.babelrc");
-//            try (BufferedWriter writer = new BufferedWriter(new FileWriter(babelConfigFilePath))) {
-//                JSONObject babelConfigJson = new JSONObject();
-//                JSONArray presets = new JSONArray();
-//                JSONArray preset1 = new JSONArray();
-//
-//                String presetOneItem1 = "@babel/preset-env";
-//                JSONObject presetOneItem2 = new JSONObject();
-//                JSONObject targets = new JSONObject();
-//                targets.put("node", "current");
-//                presetOneItem2.put("targets", targets);
-//
-//                preset1.add(presetOneItem1);
-//                preset1.add(presetOneItem2);
-//
-//                presets.add(preset1);
-//
-//                babelConfigJson.put("presets", presets);
-//
-//                writer.write(babelConfigJson.toJSONString().replace("\\", ""));
-//                writer.flush();
-//
-//                System.out.println("Jest Installer > Integrated with Babel.");
-//            } catch (IOException e) {
-//                System.err.println("Jest Installer > Occurred an error when trying to modified babel config file.");
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    private JSONObject getEslintConfigJson(File projectDir) {
+        String eslintFilePath = projectDir.getPath().concat("/.eslintrc.json");
+        try (Reader reader = new FileReader(eslintFilePath)) {
+            JSONParser parser = new JSONParser();
+            return (JSONObject) parser.parse(reader);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            System.err.println("Jest Installer > " +
+                    "Occurred an error when trying to get the config file.");
+            return null;
+        }
+    }
 }

@@ -26,7 +26,7 @@ public class ESLintAndPrettier implements Feature {
     public void install(File projectDir, PackageManagers packageManager, String args) {
         System.out.println("ESLint and Prettier Installer > Installing...");
 
-        List<String> packagesToInstall = getPackages();
+        List<String> packagesToInstall = getPackages(projectDir);
         String terminalAppName = "powershell.exe";
         List<ProcessBuilder> processBuilderList = packagesToInstall.stream()
                 .map(pkg -> getCommand(packageManager, pkg))
@@ -36,6 +36,11 @@ public class ESLintAndPrettier implements Feature {
         processBuilderList.forEach(ProcessExecutor::execute);
 
         createConfigFile(projectDir);
+
+        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
+        if(isJestInstalled){
+            new Jest().createConfigFile(projectDir);
+        }
 
         System.out.println("ESLint and Prettier Installer > ESLint and Prettier installed successfully.");
     }
@@ -53,8 +58,6 @@ public class ESLintAndPrettier implements Feature {
         ) {
             writer1.write(eslintConfig.toJSONString().replace("\\", ""));
             writer2.write(prettierConfig.toJSONString().replace("\\", ""));
-            writer1.flush();
-            writer2.flush();
         } catch (IOException e) {
             System.err.println("Eslint and Prettier Installer > " +
                     "Occurred and error when trying to create config files.");
@@ -62,7 +65,7 @@ public class ESLintAndPrettier implements Feature {
         }
     }
 
-    private List<String> getPackages() {
+    private List<String> getPackages(File projectDir) {
         String[] commonPackageNames = {
                 "eslint",
                 "prettier",
@@ -75,6 +78,10 @@ public class ESLintAndPrettier implements Feature {
         packagesList.addAll(Arrays.asList(commonPackageNames));
         packagesList.addAll(Arrays.asList(this.codeStyle.getRequiredPackages()));
 
+        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
+        if(isJestInstalled){
+            packagesList.add("eslint-plugin-jest");
+        }
         return packagesList;
     }
 

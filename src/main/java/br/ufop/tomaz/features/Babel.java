@@ -119,17 +119,6 @@ public class Babel implements Feature {
 
     private JSONArray getPresets (File projectDir){
         JSONArray presets = new JSONArray();
-//        boolean isJestInstalled = isThisPackageInstalled(projectDir, "jest");
-//        if (isJestInstalled) {
-//            JSONArray preset1 = new JSONArray();
-//            JSONObject targets = new JSONObject();
-//            targets.put("node", "current");
-//            preset1.add("@babel/preset-env");
-//            preset1.add(targets);
-//            presets.add(preset1);
-//        } else {
-//            presets.add("@babel/preset-env");
-//        }
         presets.add("@babel/preset-env");
         return presets;
     }
