@@ -6,7 +6,7 @@ plugins {
 
 group 'br.ufop.tomaz'
 version '1.0-SNAPSHOT'
-project.version = "1.0.0"
+project.version = "1.0.1"
 
 sourceCompatibility = 11
 targetCompatibility = 11

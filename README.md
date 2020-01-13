@@ -9,26 +9,26 @@ choose what packages are required to it _(e.g., Babel, Sequelize, Prettier)_,
 and, after you enjoy a cup of coffee, your new project will be ready for you.
 
 ### For now, this tool can install:
-- Babel
-- ESLint and Prettier
-    - AirBnB Style Guide
-    - Google Style Guide
-    - Standard JS Style Guide
-- Express
-- Jest
-- Lodash
-- Mongoose
-- Nodemon
-- Sequelize
-    - PostgreSQL
-    - MYSQL
-    - Maria DB
-    - SQLite
-    - Microsoft SQL Server
+- [Babel](https://babeljs.io/)
+- [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
+    - [AirBnB Style Guide](https://github.com/airbnb/javascript)
+    - [Google Style Guide](https://google.github.io/styleguide/jsguide.html)
+    - [Standard JS Style Guide](https://standardjs.com/rules-en.html)
+- [Express](https://expressjs.com/)
+- [Jest](https://jestjs.io/)
+- [Lodash](https://lodash.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Nodemon](https://nodemon.io/)
+- [Sequelize](https://sequelize.org/v5/)
+    - [PostgreSQL](https://www.postgresql.org/)
+    - [MYSQL](https://www.mysql.com/)
+    - [Maria DB](https://mariadb.org/)
+    - [SQLite](https://www.sqlite.org/index.html)
+    - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2019)
 
 ### Requirements
-- Have Node.JS installed;
-- Have NPM or Yarn installed.
+- Have [Node.JS](https://nodejs.org/) installed;
+- Have [NPM](https://www.npmjs.com/) or/and [Yarn](https://yarnpkg.com/) installed.
 
 ### Screenshots
 
