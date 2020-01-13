@@ -39,7 +39,7 @@ and, after you enjoy a cup of coffee, your new project will be ready for you.
 ### Download
 You can get an installer for NODE PROJECT CREATOR tool by clicking the button below.
 
-[![Download](https://user-images.githubusercontent.com/36672867/71843358-77be0b00-30a2-11ea-8b93-42938c95c3b1.png)](https://mega.nz/#!KLAzUICb!DS-xwGpEwxxGMZPceflumlxA9LQ6KJevcO7VYMoaBlE)
+[![Download](https://user-images.githubusercontent.com/36672867/71843358-77be0b00-30a2-11ea-8b93-42938c95c3b1.png)](https://mega.nz/#!vaxxTIaJ!9-9JSKDP7yCsLVO_fxb7NyQh2FdVDRWVORnYlfcUtu8)
 
 *P.S.: Currently, the tool is only available on Windows 10.*
 
