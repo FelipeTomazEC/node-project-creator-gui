@@ -26,10 +26,17 @@ public class Babel implements Feature {
         createDistDirectory(projectDir);
         createConfigFile(projectDir);
         insertScripts(projectDir);
+
         boolean isExpressInstalled = isThisPackageInstalled(projectDir,"express");
         if(isExpressInstalled){
             new Express().createAppEntryPoint(projectDir);
         }
+
+        boolean isDotenvInstalled = isThisPackageInstalled(projectDir, "dotenv");
+        if(isDotenvInstalled){
+            new Dotenv().updateScripts(projectDir);
+        }
+
         System.out.println("Babel Installer > Babel installed with success!");
     }
 

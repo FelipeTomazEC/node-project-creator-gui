@@ -2,10 +2,9 @@ package br.ufop.tomaz.features;
 
 import br.ufop.tomaz.util.PackageManagers;
 import br.ufop.tomaz.util.ProcessExecutor;
+import org.json.simple.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -21,6 +20,7 @@ public class Dotenv implements Feature {
 
         ProcessExecutor.execute(processBuilder);
         createConfigFile(projectDir);
+        updateScripts(projectDir);
 
         System.out.println("Dotenv Installer > Dotenv installed successfully.");
     }
@@ -37,6 +37,32 @@ public class Dotenv implements Feature {
             System.err.println("Dotenv Installer > Error when creating a .env file.");
             e.printStackTrace();
         }
+    }
+
+    public void updateScripts(File projectDir) {
+        JSONObject packageJson = getPackageJson(projectDir);
+        JSONObject scripts = (JSONObject) packageJson.get("scripts");
+        boolean isBabelInstalled = isThisPackageInstalled(projectDir, "@babel/node");
+
+        String start = ((String) scripts.get("start"))
+                .replace("src/index.js", "-r dotenv/config src/index.js");
+        scripts.replace("start", start);
+
+        if (isBabelInstalled) {
+            String serve = "node -r dotenv/config dist/index.js";
+            scripts.replace("serve", serve);
+        }
+
+        packageJson.replace("scripts", scripts);
+
+        String packageJsonPath = projectDir.getPath().concat("/package.json");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(packageJsonPath))) {
+            writer.write(packageJson.toJSONString().replace("\\", ""));
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
