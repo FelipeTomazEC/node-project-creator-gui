@@ -41,6 +41,6 @@ You can get an installer for NODE PROJECT CREATOR tool by clicking the button be
 
 [![Download](https://user-images.githubusercontent.com/36672867/71843358-77be0b00-30a2-11ea-8b93-42938c95c3b1.png)](https://mega.nz/#!LLIzwCCR!yJIGHxScKGi-TPusJhBxKmq3KowdydvMilqOfoSw3G0)
 
-*P.S.: Currently, the tool is only available on Windows 10.*
+*P.S.: Currently, the tool is only available for Windows 10.*
 
 **That's all folks! Feel free to use, and to contribute with this project as well.**
